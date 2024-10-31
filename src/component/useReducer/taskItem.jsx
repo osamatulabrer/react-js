@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export default function TaskItem({ task ,onEditTask,onDeleteTask}) {
+export default function TaskItem({ task ,tasks,onEditTask,onDeleteTask}) {
     const [isEditing, setIsEditing] = useState(false)
     let onEditContent;
 
@@ -40,7 +40,7 @@ export default function TaskItem({ task ,onEditTask,onDeleteTask}) {
             <span>#</span>
             {onEditContent}
 
-            <button onClick={()=>onDeleteTask(task.id)} className="border rounded-md px-3 py-2 bg-rose-600">delete</button>
+            <button onClick={() => onDeleteTask(tasks.id)} className="border rounded-md px-3 py-2 bg-rose-600">delete</button>
         </li>
     )
 }

@@ -1,35 +1,34 @@
-import { useState } from "react"
+import { useReducer } from "react"
 import AddTask from "./component/useReducer/AddTask"
 import TaskList from "./component/useReducer/taskList"
 import { initialTasks } from "./component/useReducer/initialTasks"
+import TaskReducer from "./component/useReducer/Taskreducer"
 
 
 
 export function App(){
  
-const [tasks,setTasks] = useState(initialTasks)
+const [tasks,dispatch] = useReducer(TaskReducer,initialTasks)
 const handleAddTask = (task)=>{
-    setTasks([
-      ...tasks,
-      {
-        id: tasks.length + 1,
-        text : task
-      }
-    ])
+  dispatch({
+    type: 'added',
+    
+    task: task,
+  });
 }
 const handleEditTask = (text)=>{
- setTasks(tasks.map(t =>{
-  if(t.id == text.id){
-    return text
-  }else{
-    return t
-  }
- }))
+  dispatch({
+    type: 'edited',
+    text: text,
+  });
 }
 
 const handleDeleteTask = (id)=>{
-  console.log(id)
-  // setTasks(tasks.filter(task => task.id !== id))
+  dispatch({
+    type: 'deleted',
+    id: id,
+  });
+
 }
   return (
 
@@ -52,15 +51,4 @@ const handleDeleteTask = (id)=>{
 
 
 
-// let a = 10;
-// let b = a;
-// b = 20
-// console.log(a)
 
-// let aa = {
-//   a:20,
-//   b:20
-// }
-// let bb = aa
-// bb.a = 30
-// console.log(aa)
